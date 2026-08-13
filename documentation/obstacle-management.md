@@ -1,32 +1,154 @@
-[obstacle-management.md](https://github.com/user-attachments/files/31033581/obstacle-management.md)
+[obstacle-management.md](https://github.com/user-attachments/files/31034125/obstacle-management.md)
 # Obstacle Management
 
-## Current Direction
-A Raspberry Pi is intended to provide vision processing for the Obstacle Challenge.
+## Strategy Overview
+
+The current obstacle-management architecture uses a Raspberry Pi for vision and an Arduino Uno/Mega for vehicle control.
 
 ```text
 Camera
   |
+  v
 Raspberry Pi
 Vision / Perception
   |
+  v
+Perception Message
+  |
+  v
 Arduino Uno / Mega
-Vehicle Decision + Real-Time Control
+Navigation State Machine
   |
   +--> Steering Servo
-  +--> DRV8833 --> N20 Drive Motor
+  |
+  +--> DRV8833 --> N20 Motor
 ```
 
-## Responsibilities
-The Raspberry Pi will focus on camera/image processing. The Arduino Uno/Mega will handle motor control, steering, encoder feedback, MPU6500, three distance sensors, vehicle state and reception of Pi perception data.
+The Raspberry Pi does not need to directly control the motor. Its job is to convert camera images into useful information that the Arduino can combine with distance, encoder and IMU data.
 
-## Distance Sensing
-Left, front and right distance measurements will complement camera information with direct geometric information.
+---
 
-## Future Decision Logic
-The controller may combine Raspberry Pi perception, three distance measurements, MPU6500 orientation, encoder feedback and current vehicle state to choose steering and propulsion actions.
+## Information Available to the Vehicle
 
-The exact camera, vision algorithm and Pi-to-Arduino protocol remain under development.
+### Vision
+Potentially provides:
+- traffic-sign/obstacle type;
+- relevant colour;
+- approximate image position;
+- confidence.
 
-## Earlier Experiments
-ESP32-CAM and simple `R`/`G` serial communication were explored earlier. These experiments remain documented as engineering history but are not the intended final vision architecture.
+### Left / Right Distance Sensors
+Potentially provide:
+- lateral clearance;
+- path alignment;
+- recovery information after manoeuvres.
+
+### Front Distance Sensor
+Potentially provides:
+- forward clearance;
+- approach information;
+- sanity check for visual information.
+
+### MPU6500
+Potentially provides:
+- turn progress;
+- heading change;
+- unexpected rotation.
+
+### Encoder
+Potentially provides:
+- travelled distance;
+- speed;
+- progress through a manoeuvre.
+
+---
+
+## Proposed Obstacle Flow
+
+```text
+NORMAL DRIVING
+      |
+      v
+VISION RESULT AVAILABLE?
+   /        \
+ NO          YES
+ |            |
+ |       VALID / CONFIDENT?
+ |          /       \
+ |        NO         YES
+ |        |           |
+ +--------+      CLASSIFY / LOCATE
+                     |
+                     v
+               SELECT RESPONSE
+                     |
+                     v
+               REDUCE SPEED
+                     |
+                     v
+               STEER / PASS
+                     |
+                     v
+                  RECOVER
+                     |
+                     v
+               NORMAL DRIVING
+```
+
+The exact passing strategy will be documented after the camera and field tests are performed.
+
+---
+
+## Why Use Multiple Sensors?
+
+A camera result alone can be affected by:
+- lighting;
+- blur;
+- partial visibility;
+- false colour classification;
+- processing delay.
+
+Distance sensors cannot identify traffic-sign colour, but they can provide direct geometric information.
+
+The IMU and encoder provide movement information.
+
+The intended strategy therefore uses the Raspberry Pi as the primary visual perception system while allowing the Arduino to check the manoeuvre against other sensor information.
+
+---
+
+## Edge Cases
+
+The obstacle strategy should be tested for:
+- traffic sign close to a corner;
+- partial sign visibility;
+- changing lighting;
+- temporary false detection;
+- no detection;
+- Pi communication timeout;
+- distance sensor disagreement;
+- vehicle too close to a boundary;
+- recovery after an over-steer or under-steer.
+
+---
+
+## Validation Metrics
+
+| Metric | Result |
+|---|---:|
+| Red-sign detection success rate | TBD |
+| Green-sign detection success rate | TBD |
+| Mean vision latency | TBD |
+| Successful obstacle passes / attempts | TBD |
+| Boundary contacts | TBD |
+| Recovery success rate | TBD |
+| Complete Obstacle Challenge runs | TBD |
+
+Results will be stored in [Testing & Results](testing-and-results.md).
+
+---
+
+## Earlier ESP32-CAM Experiments
+
+The team previously explored AI Thinker ESP32-CAM and simple serial communication. An experimental `R`/`G` approach demonstrated controller-to-controller messaging.
+
+These experiments are retained because they influenced the move toward a clearer two-processor architecture, but they are not presented as the final obstacle-management system.
