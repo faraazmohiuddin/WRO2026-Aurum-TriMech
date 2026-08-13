@@ -1,11 +1,12 @@
-[README.md](https://github.com/user-attachments/files/31034042/README.md)
+[README-Aurum-TriMech-Corrected.md](https://github.com/user-attachments/files/31034423/README-Aurum-TriMech-Corrected.md)
 # WRO 2026 Future Engineers – Aurum TriMech
 
 > **Status:** Active engineering project for the WRO 2026 Future Engineers category.
 
 ## Team
 
-**Team:** Aurum TriMech 
+**Team:** Aurum TriMech  
+**School:** Dawn High School  
 **Category:** WRO 2026 Future Engineers  
 **Coach:** Faraaz Mohiuddin
 
