@@ -1,33 +1,40 @@
-# Engineering Journal
-
-## Development summary
-
-This journal records the major engineering work completed during the intensive development period before the WRO 2026 national round.
-
-### Controller experiments
-We worked with Arduino Uno, ESP32 DevKit V1 and AI Thinker ESP32-CAM. ESP32 gave us more processing and serial options, but upload reliability and integration complexity consumed significant development time. The current core vehicle direction uses Arduino Uno for simpler, more predictable low-level control.
-
-### Motor and drivetrain experiments
-We considered/tested BO motors, N20 geared motors and a JGB37-520 12 V 111 RPM motor with encoder. We want one drive motor with a mechanical transmission to the driven wheels. Gearbox, common-axle and differential concepts were explored.
-
-### Motor drivers
-L298N was used in early testing. TB6612FNG is the preferred current driver for the Uno build.
-
-### Steering
-SG90 was used for initial servo tests. Higher-torque DS3218/DS3225 class servos were considered for the final chassis. Final steering limits must be calibrated mechanically.
-
-### Sensing
-MPU6050 was selected for orientation experiments. HC-SR04 ultrasonic sensing was used/considered for distance. ToF sensing was discussed as an upgrade. JGB37 encoder integration is planned for distance/rotation feedback.
-
-### Vision
-ESP32-CAM colour detection was explored for red/green traffic signs. A simple serial protocol using `R` and `G` was tested. OpenMV, Pixy2 and other camera options were considered. Vision is being kept separate from the basic mobility milestone.
-
-### Upload/debugging lessons
-We encountered ESP32 connection, sync and COM-port problems. We learned to check boot mode, GPIO0, reset timing, board selection, stable power, TX/RX crossing, drivers, and whether the USB cable actually carries data.
-
-### Current milestone
-Build the minimum reliable autonomous platform:
-Arduino Uno + TB6612FNG + JGB37 motor + servo steering + MPU6050 + distance sensor, then integrate encoder feedback and obstacle perception.
-
-## TODO
-Add dated photos, test tables, lap results, steering calibration, encoder counts and final design changes as they happen.
+Engineering Journal
+Current Architecture
+The present direction is a LEGO Technic vehicle using Ackermann steering, a mechanical differential, one N20 6V 200 RPM encoder motor, DRV8833, MPU6500, three distance sensors, an Arduino Uno or Mega for vehicle control, and Raspberry Pi for vision.
+Controllers
+Early work explored Arduino Uno, ESP32 DevKit and ESP32-CAM. The current direction separates responsibilities:
+Arduino Uno or Mega for real-time vehicle control;
+Raspberry Pi for vision processing.
+The Uno/Mega decision remains open until I/O and communication requirements are tested.
+Drivetrain
+BO motors, N20 variants and JGB37-520 were explored. The current selected drive motor is an N20 6V 200 RPM geared motor with encoder. Two were ordered, but one is intended for drive and the second is a backup.
+A mechanical differential gearbox will connect the drive motor to the driving axle.
+Chassis and Steering
+The current chassis direction uses LEGO Technic for rapid mechanical iteration. Front steering uses Ackermann geometry with servo actuation.
+Motor Drivers
+Development path:
+L298N experiments;
+TB6612FNG considered;
+DRV8833 selected for the current N20 drivetrain.
+Orientation
+MPU6050 was used in earlier experiments. MPU6500 is the current selected IMU.
+Distance Sensing
+Three distance sensors are planned at left, front and right. Exact models remain to be finalized.
+Vision
+ESP32-CAM was explored for colour detection and simple serial communication. The current intended vision system uses Raspberry Pi plus camera, with perception results passed to the Arduino controller.
+Power
+The current decision remains open between an approximately 11V rechargeable battery and a high-quality power bank. MP1584 3A and TPS565201 5V 5A modules are available/ordered for regulation testing.
+The final choice will be based on measured stability, current capability, weight and runtime.
+Next Tests
+build LEGO Technic rolling chassis;
+construct/test Ackermann steering;
+integrate mechanical differential;
+test N20 + DRV8833;
+read and calibrate encoder;
+test MPU6500;
+select/test three distance sensors;
+compare Uno vs Mega I/O requirements;
+test power options under load;
+start Raspberry Pi camera pipeline;
+define Pi-to-Arduino communication;
+add measured results, photographs and videos.
