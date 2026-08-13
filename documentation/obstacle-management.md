@@ -1,26 +1,32 @@
+[obstacle-management.md](https://github.com/user-attachments/files/31033581/obstacle-management.md)
 # Obstacle Management
 
-The Obstacle Challenge requires perception plus controlled path planning.
+## Current Direction
+A Raspberry Pi is intended to provide vision processing for the Obstacle Challenge.
 
-## Experimental concept
-Camera detects a traffic-sign colour and sends a compact command to the main controller.
+```text
+Camera
+  |
+Raspberry Pi
+Vision / Perception
+  |
+Arduino Uno / Mega
+Vehicle Decision + Real-Time Control
+  |
+  +--> Steering Servo
+  +--> DRV8833 --> N20 Drive Motor
+```
 
-Example experimental protocol:
-- `R` = red detected
-- `G` = green detected
+## Responsibilities
+The Raspberry Pi will focus on camera/image processing. The Arduino Uno/Mega will handle motor control, steering, encoder feedback, MPU6500, three distance sensors, vehicle state and reception of Pi perception data.
 
-A serial test successfully alternated these characters at 9600 baud, proving basic controller-to-controller communication.
+## Distance Sensing
+Left, front and right distance measurements will complement camera information with direct geometric information.
 
-Earlier demonstrations mapped these letters directly to simple motor actions. Those mappings were only bench tests and are not the final obstacle strategy.
+## Future Decision Logic
+The controller may combine Raspberry Pi perception, three distance measurements, MPU6500 orientation, encoder feedback and current vehicle state to choose steering and propulsion actions.
 
-## Final strategy still to validate
-The competition algorithm should combine:
-- traffic-sign colour;
-- sign position in the camera image;
-- vehicle heading;
-- wall/track distance;
-- steering geometry;
-- safe clearance.
+The exact camera, vision algorithm and Pi-to-Arduino protocol remain under development.
 
-## Development rule
-First achieve reliable Open Challenge mobility. Then add obstacle perception without destabilising the base vehicle.
+## Earlier Experiments
+ESP32-CAM and simple `R`/`G` serial communication were explored earlier. These experiments remain documented as engineering history but are not the intended final vision architecture.
