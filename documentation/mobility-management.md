@@ -1,29 +1,29 @@
+[mobility-management.md](https://github.com/user-attachments/files/31033562/mobility-management.md)
 # Mobility Management
 
-## Current direction
-The vehicle is intended to use one geared DC drive motor and servo-based front steering.
+## Current Direction
+Aurum TriMech is developing a LEGO Technic-based vehicle with:
+- one N20 6V 200 RPM geared motor with encoder;
+- a mechanically coupled driving axle;
+- a mechanical differential gearbox;
+- Ackermann-style front steering;
+- servo steering.
 
-### Drive motor
-Current candidate: JGB37-520, 12 V, 111 RPM, with encoder.
+A second identical N20 has been ordered as a **backup**, not as a second independently driven wheel motor.
 
-Earlier options:
-- N20 6 V 100 RPM geared motor;
-- N20 12 V 600 RPM;
-- two BO motors for test rigs.
+## LEGO Technic Chassis
+LEGO Technic allows rapid adjustment of wheelbase, track width, axle position, steering geometry, gearing, sensor mounting and electronics placement. Custom/3D-printed interfaces may be used where required to connect non-LEGO components.
 
-### Transmission
-We explored a one-motor/two-wheel mechanism using a shared axle, gears, gearbox or differential. A custom 3D-printable mechanism was also considered. Final geometry must be documented once the chassis is fixed.
+## Drive and Encoder
+The selected N20 encoder motor will be tested for rotation count, speed, repeatable movement and distance estimation. Encoder counts-per-revolution and distance-per-count will be measured on the completed drivetrain.
 
-### Steering
-Initial tests used SG90. Higher torque DS3218/DS3225 options were considered. Test positions included 90° centre and wide left/right ranges, but the final safe angles must be measured on the real linkage.
+## Mechanical Differential
+The motor drives both wheels of the driving axle through a mechanical differential gearbox. The differential allows inner and outer wheels to rotate at different speeds in a turn while remaining part of one mechanical drivetrain.
 
-### Control objective
-The mobility controller must produce:
-1. repeatable straight motion;
-2. controlled cornering while moving;
-3. predictable stop distance;
-4. minimal steering oscillation;
-5. sufficient traction without excessive speed.
+## Ackermann Steering
+The front wheels use Ackermann-style steering. The inner front wheel should steer through a greater angle than the outer wheel during a turn.
 
-### Planned feedback
-The JGB37 encoder and MPU6050 can provide feedback for more repeatable movement. These features must be calibrated and validated before being treated as competition-ready.
+Testing will establish mechanical centre, safe steering limits, linkage freedom, repeatability and performance under vehicle load.
+
+## Earlier Work
+Earlier mobility work included BO motors, N20 100 RPM options, JGB37-520, L298N, TB6612FNG and SG90 steering tests.
