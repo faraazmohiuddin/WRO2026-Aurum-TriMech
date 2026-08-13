@@ -1,24 +1,41 @@
+[power-and-sense-management.md](https://github.com/user-attachments/files/31033605/power-and-sense-management.md)
 # Power and Sense Management
 
-## Power
-Development used a 2×18650 battery concept (nominal 7.4 V), USB power for programming, and several regulator/power-routing experiments. L298N 5 V output was used in some early tests. Stable regulated power is especially important for servos and ESP32-CAM.
+## Power Source
+Two options are being evaluated:
+1. approximately 11V rechargeable battery;
+2. high-quality power bank.
 
-All communicating modules require a common ground.
+The final choice will be based on current capability, voltage stability, runtime, weight and compatibility with the Raspberry Pi, motor and servo.
 
-Do not power a high-current steering servo from the Arduino Uno 5 V pin without verifying current requirements and regulation.
+The selected N20 drive motor is rated for 6V. If a higher-voltage battery is used, an appropriate motor-control/power strategy is required; full battery voltage should not simply be applied continuously to the motor.
 
-## Sensors
+## Regulation
+- MP1584 adjustable 3A buck modules ×2
+- TPS565201 5V 5A step-down module
 
-### MPU6050
-Purpose: orientation and turn measurement.
-Uno I2C pins: SDA=A4, SCL=A5.
+Final rail allocation will follow load and thermal testing.
 
-### HC-SR04
-Purpose: basic distance/wall/obstacle measurement.
-One test assignment: TRIG=D10, ECHO=D11.
+## MPU6500
+The selected IMU is the MPU6500 6-axis gyro/accelerometer. Intended uses include turn measurement, orientation monitoring and heading-change estimation. Earlier MPU6050 work remains engineering history.
 
-### Motor encoder
-The JGB37-520 encoder is intended for rotation/distance feedback. Pin mapping and counts-per-revolution must be measured for the exact motor.
+## Encoder
+The N20 encoder may provide speed, rotation count, approximate travelled distance and feedback for repeatable motion.
 
-### Vision
-AI Thinker ESP32-CAM was tested as a colour-detection subsystem. OpenMV and Pixy2 were considered alternatives. Final vision hardware is not yet frozen.
+## Three Distance Sensors
+Three sensors are planned:
+- **Left:** side/boundary clearance
+- **Front:** forward clearance
+- **Right:** side/boundary clearance
+
+The exact sensor model is not yet finalized, so interfaces and pin assignments remain open.
+
+## Vision
+A Raspberry Pi is intended to process camera information. Exact Pi model, camera and vision software remain under development.
+
+## Sensor Fusion Direction
+The vehicle can combine:
+- encoder → drivetrain movement;
+- MPU6500 → orientation/rotation;
+- left/front/right sensors → surrounding geometry;
+- Raspberry Pi → visual perception.
