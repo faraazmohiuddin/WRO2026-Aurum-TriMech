@@ -6,7 +6,6 @@
 ## Team
 
 **Team:** Aurum TriMech  
-**School:** Dawn High School  
 **Category:** WRO 2026 Future Engineers  
 **Coach:** Faraaz Mohiuddin
 
