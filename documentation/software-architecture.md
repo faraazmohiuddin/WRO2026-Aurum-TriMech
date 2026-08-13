@@ -1,27 +1,46 @@
+[software-architecture.md](https://github.com/user-attachments/files/31033616/software-architecture.md)
 # Software Architecture
 
-## Current Arduino Uno architecture
+## Current Two-Processor Direction
 
-Inputs:
-- MPU6050 over I2C
-- distance sensor
-- JGB37 encoder (planned integration)
-- optional external vision command later
+### Raspberry Pi
+Intended responsibilities:
+- camera acquisition;
+- image processing;
+- traffic-sign/obstacle perception;
+- sending compact perception results to the Arduino.
 
-Outputs:
-- TB6612FNG motor-control pins
-- steering-servo PWM
+### Arduino Uno or Mega
+Intended responsibilities:
+- DRV8833 motor control;
+- steering servo;
+- N20 encoder;
+- MPU6500;
+- three distance sensors;
+- Raspberry Pi communication;
+- vehicle state machine and real-time movement decisions.
 
-Recommended software layers:
-1. hardware drivers;
-2. calibrated sensor readings;
-3. motion primitives;
-4. vehicle state machine;
-5. Open/Obstacle challenge logic.
+## Uno vs Mega
+The Uno is familiar and compact. The Mega provides more I/O and hardware serial resources. Final selection will follow integration testing of the three distance sensors, encoder, MPU6500, motor driver, servo, Pi communication and debugging requirements.
 
-## Historical ESP32 architecture
-An ESP32 DevKit V1 was tested with L298N and servo control. One pin map used ENA=26, IN1=27, IN2=14, ENB=33, IN3=32, IN4=13. GPIO25 was used in a servo experiment.
+## Proposed Software Layers
 
-An ESP32-CAM concept sent `R`/`G` commands to an ESP32 over UART/Serial2.
+**Raspberry Pi**
+1. camera driver
+2. image processing
+3. perception
+4. navigation/perception message generation
+5. communication
 
-These files are retained as engineering history and should not be mistaken for the final Uno program.
+**Arduino**
+1. hardware drivers
+2. sensor acquisition
+3. calibrated values
+4. motor/steering primitives
+5. state machine
+6. navigation decisions
+
+Possible states include START, DRIVE_STRAIGHT, APPROACH_CORNER, TURN, ALIGN, OBSTACLE_RESPONSE, RECOVER and STOP. These remain architectural placeholders until tested.
+
+## Historical Architecture
+Earlier development explored ESP32 DevKit and ESP32-CAM controller communication. Those files are retained as engineering history.
