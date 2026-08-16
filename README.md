@@ -3,7 +3,32 @@
 
 > **Status:** Active engineering project for the WRO 2026 Future Engineers category.
 
-## Team
+### About Aurum TriMech
+Welcome to the GitHub repository of **Team Aurum TriMech**. Our team is made up of three enthusiastic young engineers who share a passion for robotics, engineering and innovation. The team specializes in various skills such as LEGO robotics, chassis designing, mechanical mechanisms, Arduino programing and problem-solving. Our team has significant competetive experience competing in district-level science fairs, technology exhibitions and the World Robot Olympiad (WRO).
+
+---
+## 📚 **Table of Contents**
+- [Our Team](#our-team)
+- [Project Goal](#project-goal)
+- [system-architecture](#system-architecture)
+- [currect-vehicle-direction](#currect-vehicle-direction)
+- [Mechanical Concept](#mechanical-concept)
+- [Drive Speed and Torque Reasoning](#drive-speed)
+- [Control and Vision Architecture](#control-and-vision)
+- [Three Sensor layout](#three-sensor-layout)
+- [Power Architecture](#power-architecture)
+- [Proposed Navigation State Machine](#navigation)
+- [Engineering Evolution](#eveolution)
+- [Testing Philosophy](#testing-philosophy)
+- [Engineering Decisions and Risks](#risks)
+- [Documentation](#documentation)
+- [Repository Structure](#repo-structure)
+- [Current Open Decisioins](#current-open-decisions)
+- [Next Development Milestones](#next-development-milestones)
+
+---
+
+## Team <a id="our-team"></a>
 
 **Team:** Aurum TriMech  
 **Category:** WRO 2026 Future Engineers  
@@ -14,13 +39,10 @@
 - Muhammed Adil Akhtar
 - Abdul Rahman uddin
 
-### About Aurum TriMech
-
-Aurum TriMech is a team of three enthusiastic young engineers—Umar, Adil, and Abdul Rahman—who share a passion for robotics, engineering, and innovation. Their experience spans school- and district-level science fairs, technology exhibitions, college robotics events such as Robo Wars, and the World Robot Olympiad (WRO). Through these experiences, the team has developed practical skills in LEGO robotics, chassis design, mechanical mechanisms, Arduino programming, and engineering problem-solving.
 
 ---
 
-## Project Goal
+## Project Goal <a id="project-goal"></a>
 
 Our goal is to design, build, test and progressively improve an autonomous four-wheel vehicle for WRO Future Engineers.
 
@@ -36,7 +58,7 @@ Our current design is still being tested. Where a component has not yet been sel
 
 ---
 
-## Current Vehicle Direction
+## Current Vehicle Direction <a id="currect-vehicle-direction"></a>
 
 | Subsystem | Current direction |
 |---|---|
@@ -57,56 +79,13 @@ Our current design is still being tested. Where a component has not yet been sel
 
 ---
 
-## System Architecture
+## System Architecture <a id="system-architecture"></a>
 
-```text
-                         CAMERA
-                           |
-                           v
-                    +---------------+
-                    | RASPBERRY PI  |
-                    | Vision / CV   |
-                    +-------+-------+
-                            |
-                    perception message
-                            |
-                            v
-                    +---------------+
-                    | ARDUINO       |
-                    | UNO / MEGA    |
-                    | Vehicle Ctrl  |
-                    +---+---+---+---+
-                        |   |   |
-              +---------+   |   +---------+
-              |             |             |
-              v             v             v
-          +--------+   +-----------+   +--------+
-          |DRV8833 |   | Steering  |   |MPU6500 |
-          +---+----+   | Servo     |   +--------+
-              |        +-----------+
-              v
-       N20 6V 200 RPM
-          + Encoder
-              |
-              v
-     Mechanical Differential
-          /             \
-         v               v
-    Rear Wheel       Rear Wheel
-
-       LEFT       FRONT       RIGHT
-        SENSOR     SENSOR      SENSOR
-           \         |         /
-            \        |        /
-             +-------+-------+
-                     |
-                     v
-               UNO / MEGA
-```
+![Robot System Architecture](./t-photos/Robot-System-Architecture.png)
 
 ---
 
-## Mechanical Concept
+## Mechanical Concept <a id="mechanical-concept"></a>
 
 ### LEGO Technic chassis
 
@@ -132,7 +111,7 @@ The final geometry will be determined by testing rather than by servo-angle assu
 
 ---
 
-## Drive Speed and Torque Reasoning
+## Drive Speed and Torque Reasoning <a id="drive-speed"></a>
 
 The motor's nominal gearbox output is 200 RPM, but motor RPM alone does not determine vehicle speed. Final speed also depends on:
 
@@ -163,7 +142,7 @@ See [Mobility Management](documentation/mobility-management.md) and [Testing & R
 
 ---
 
-## Control and Vision Architecture
+## Control and Vision Architecture <a id="control-and-vision"></a>
 
 We are currently evaluating **Arduino Uno vs Arduino Mega** for the main vehicle controller.
 
@@ -183,19 +162,12 @@ This separation lets us test vision and mobility independently and prevents a ca
 
 ---
 
-## Three-Sensor Layout
+## Three-Sensor Layout <a id="three-sensor-layout"></a>
 
 The intended distance-sensor arrangement is:
 
-```text
-                 FRONT
-                   ^
-                   |
-             [Front Sensor]
+![Three Sensor Layout](./t-photos/three-sensor-layout.png)
 
- [Left Sensor]             [Right Sensor]
-       <                         >
-```
 
 The proposed roles are:
 
@@ -209,7 +181,7 @@ See [Power & Sense Management](documentation/power-and-sense-management.md).
 
 ---
 
-## Power Architecture
+## Power Architecture <a id="power-architecture"></a>
 
 Two power approaches are currently being evaluated:
 
@@ -238,42 +210,10 @@ A quantitative power budget is being prepared and will be updated with datasheet
 
 ---
 
-## Proposed Navigation State Machine
+## Proposed Navigation State Machine <a id="navigation"></a>
 
-```text
-START
-  |
-  v
-INITIALIZE / CALIBRATE
-  |
-  v
-DRIVE_STRAIGHT <----------------------+
-  |                                   |
-  | corner / navigation condition     |
-  v                                   |
-APPROACH_CORNER                        |
-  |                                   |
-  v                                   |
-TURN                                  |
-  |                                   |
-  v                                   |
-ALIGN --------------------------------+
+![Navigation Layout](./t-photos/Nav-Layout.png)
 
-Vision obstacle / traffic-sign information
-  |
-  v
-OBSTACLE_RESPONSE
-  |
-  v
-RECOVER
-  |
-  +--------------------> DRIVE_STRAIGHT
-
-Fault / finish condition
-  |
-  v
-STOP
-```
 
 These state names are currently architectural placeholders. Each transition will be tied to measured sensor or vision conditions as testing progresses.
 
@@ -281,7 +221,7 @@ See [Software Architecture](documentation/software-architecture.md) and [Obstacl
 
 ---
 
-## Engineering Evolution
+## Engineering Evolution <a id="eveolution"></a>
 
 The project has changed as the team learned more about the hardware.
 
@@ -299,7 +239,7 @@ We retain experimental code and troubleshooting information because the design h
 
 ---
 
-## Testing Philosophy
+## Testing Philosophy <a id="testing-philosophy"></a>
 
 A subsystem is not considered final simply because it works once.
 
@@ -329,7 +269,7 @@ The current test matrix is in [Testing & Results](documentation/testing-and-resu
 
 ---
 
-## Engineering Decisions and Risks
+## Engineering Decisions and Risks <a id="risks"></a>
 
 Major component decisions are recorded separately so that the repository shows **why** the design changed, not just what the latest design contains.
 
@@ -342,7 +282,7 @@ See:
 
 ---
 
-## Documentation
+## Documentation <a id="documentation"></a>
 
 ### Engineering
 - [Engineering Journal](documentation/engineering-journal.md)
@@ -364,7 +304,7 @@ See:
 
 ---
 
-## Repository Structure
+## Repository Structure <a id="repo-structure"></a>
 
 ```text
 WRO2026-Aurum-TriMech/
@@ -392,7 +332,7 @@ WRO2026-Aurum-TriMech/
 
 ---
 
-## Current Open Decisions
+## Current Open Decisions <a id="current-open-decisions"></a>
 
 The following are deliberately not presented as final:
 
@@ -412,7 +352,7 @@ These will be closed through testing and recorded in the decision log.
 
 ---
 
-## Next Development Milestones
+## Next Development Milestones <a id="next-development-milestones"></a>
 
 1. Build the LEGO Technic rolling chassis.
 2. Build and measure Ackermann steering.
