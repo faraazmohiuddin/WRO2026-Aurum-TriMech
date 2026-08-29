@@ -1,72 +1,94 @@
 [README-Aurum-TriMech-Corrected.md](https://github.com/user-attachments/files/31034423/README-Aurum-TriMech-Corrected.md)
+
 # WRO 2026 Future Engineers – Aurum TriMech
 
 > **Status:** Active engineering project for the WRO 2026 Future Engineers category.
 
+### TODO:
+- Replace the placeholder points with real text in [Documentation Structure](#documentation-structure) `Technical Content` column
+
+
 ### About Aurum TriMech
 
-Welcome to the GitHub repository of **Team Aurum TriMech**. Our team is made up of three enthusiastic young engineers who share a passion for robotics, engineering and innovation. The team specializes in various skills such as LEGO robotics, chassis designing, mechanical mechanisms, Arduino programing and problem-solving. Our team has significant competetive experience competing in district-level science fairs, technology exhibitions and the World Robot Olympiad (WRO).
+Welcome to the GitHub repository of **Team Aurum TriMech** . Our team is made up of three enthusiastic young engineers who share a passion for robotics, engineering and innovation. The team specializes in various skills such as LEGO robotics, chassis designing, mechanical mechanisms, Arduino programing and problem-solving. Our team has significant competetive experience competing in district-level science fairs, technology exhibitions and the World Robot Olympiad (WRO).
 
 ---
 
-## 📚 **Table of Contents**
+## 📚 **Table of Contents** 
 
-- [Our Team](#our-team)
+* [Our Team](#our-team)
 
-- [Project Goal](#project-goal)
+* [Documentation Structure](#documentation-structure)
 
-- [system-architecture](#system-architecture)
+* [Project Goal](#project-goal)
 
-- [currect-vehicle-direction](#currect-vehicle-direction)
+* [System Architecture](#system-architecture)
 
-- [currect-build-progress](#build-progress)
+* [Currect Vehicle Direction](#currect-vehicle-direction)
 
-- [Mechanical Concept](#mechanical-concept)
+* [Mechanical Concept](#mechanical-concept)
 
-- [Drive Speed and Torque Reasoning](#drive-speed)
+* [Drive Speed and Torque Reasoning](#drive-speed)
 
-- [Control and Vision Architecture](#control-and-vision)
+* [Control and Vision Architecture](#control-and-vision)
 
-- [Three Sensor layout](#three-sensor-layout)
+* [Three Sensor layout](#three-sensor-layout)
 
-- [Power Architecture](#power-architecture)
+* [Power Architecture](#power-architecture)
 
-- [Proposed Navigation State Machine](#navigation)
+* [Proposed Navigation State Machine](#navigation)
 
-- [Engineering Evolution](#eveolution)
+* [Engineering Evolution](#eveolution)
 
-- [Testing Philosophy](#testing-philosophy)
+* [Testing Philosophy](#testing-philosophy)
 
-- [Engineering Decisions and Risks](#risks)
+* [Engineering Decisions and Risks](#risks)
 
-- [Documentation](#documentation)
+* [Documentation](#documentation)
 
-- [Repository Structure](#repo-structure)
+* [Current Open Decisioins](#current-open-decisions)
 
-- [Current Open Decisioins](#current-open-decisions)
-
-- [Next Development Milestones](#next-development-milestones)
+* [Next Development Milestones](#next-development-milestones)
 
 ---
 
 ## Team <a id="our-team"></a>
 
-**Team:** Aurum TriMech
+ **Team:** Aurum TriMech
 
-![Team Photo](./t-photos/Team_Photo.jpg)
+<img src="./t-photos/Team_Photo.jpg" alt="Team Aurum-TriMech Official Photo" width="600">
 
-**Category:** WRO 2026 Future Engineers
+ **Category:** WRO 2026 Future Engineers
 
-**Coach:** Faraaz Mohiuddin
+ **Coach:** Faraaz Mohiuddin
 
-**Team members**
+ **Team members** 
 
-- Syed Umar
+* Syed Umar
 
-- Muhammed Adil Akhtar
+* Muhammed Adil Akhtar
 
-- Abdul Rahman uddin
+* Abdul Rahman uddin
 
+---
+
+## ** Documentation Structure** <a id="documentation-structure"></a>
+
+<div align="center">
+
+**Each folder contains comprehensive README documentation with specialized technical content** 
+
+| 📁 Folder | 🎯 Technical Content | 📖 Detailed Documentation |
+|-----------|----------------------|---------------------------|
+| **Models** | **Models** <br>• Point 1<br>• Point 2<br>• Point 3 | [🔗 Explore 3D Models & Assembly Documentation](./models/README.md) |
+| **Schemes** | **Electrical Systems** <br>• Point 1<br>• Point 2<br>• Point 3 | [🔗 Explore Schematics & Wiring Documentation](./schemes/README.md) |
+| **Source Code** | **Software Code** <br>• Point 1<br>• Point 2<br>• Point 3 | [🔗 Explore Software & Algorithms Documentation](./src/README.md) |
+| **Team Photos** | **Team Photos** <br>• Point 1<br>• Point 2<br>• Point 3 | [🔗 Explore Team Photos Documentation](./t-photos/README.md) |
+| **Vehicle Photos** | **Vehicle Photos** <br>• Point 1<br>• Point 2<br>• Point 3 | [🔗 Explore Vehicle Photos Documentation](./v-photos/README.md) |
+| **Videos** | **Performance Videos** <br>• Point 1<br>• Point 2<br>• Point 3 | [🔗 Explore Performance Videos Documentation](./video/README.md) |
+| **Other Resources** | **Other References** <br>• Point 1<br>• Point 2<br>• Point 3 | [🔗 Explore Additional Resources Documentation](./other/README.md) |
+
+</div>
 ---
 
 ## Project Goal <a id="project-goal"></a>
@@ -75,15 +97,15 @@ Our goal is to design, build, test and progressively improve an autonomous four-
 
 Rather than treating the robot as one large system, we are developing it as a set of testable subsystems:
 
-1. **Mechanical mobility** – chassis, drive motor, differential and Ackermann steering.
+01. **Mechanical mobility** – chassis, drive motor, differential and Ackermann steering.
 
-2. **Low-level control** – motor, servo, encoder, IMU and distance sensors.
+02. **Low-level control** – motor, servo, encoder, IMU and distance sensors.
 
-3. **Vision** – camera processing on a Raspberry Pi.
+03. **Vision** – camera processing on a Raspberry Pi.
 
-4. **Power** – stable regulated supplies for the motor, controller, servo, sensors and Raspberry Pi.
+04. **Power** – stable regulated supplies for the motor, controller, servo, sensors and Raspberry Pi.
 
-5. **Navigation software** – a state-based strategy combining sensor and vision information.
+05. **Navigation software** – a state-based strategy combining sensor and vision information.
 
 Our current design is still being tested. Where a component has not yet been selected or a measurement has not yet been made, the documentation marks it as **TBD** rather than presenting an assumption as a measured result.
 
@@ -110,31 +132,17 @@ Our current design is still being tested. Where a component has not yet been sel
 
 ---
 
-## Current Build Progress <a id="build-progress"></a>
-
-The vehicle is still under active construction. These photos reflect the current state of the physical build, not a finished robot.
-
-| View | Photo |
-|---|---|
-| Chassis – front |  <img src="./v-photos/front.jpg" width="300"> |
-| Chassis – back |  <img src="./v-photos/back.jpg" width="300">  |
-| Chassis – bottom |  <img src="./v-photos/bottom.jpg" width="300">  |
-| Chassis – left |  <img src="./v-photos/left.jpg" width="300"> |
-| Chassis – right |  <img src="./v-photos/right.jpg" width="300">  |
-
-
----
-
 ## System Architecture <a id="system-architecture"></a>
 
-![Robot System Architecture](./t-photos/Robot-System-Architecture.png)
+![Robot System Architecture](./other//Robot-System-Architecture.png)
 
 ---
 
 ## Mechanical Concept <a id="mechanical-concept"></a>
 
 ### LEGO Technic chassis
-![Chasssis Parts](./t-photos/Chassis.jpg)
+
+![Chasssis Parts](./other/Chassis.jpg)
 
 LEGO Technic is being used as the primary chassis system because it allows us to change wheelbase, track width, motor position, gear placement, steering geometry and sensor mounts quickly during testing.
 
@@ -142,13 +150,13 @@ The intention is not simply to assemble a fixed kit. The chassis is being used a
 
 ### Single drive motor
 
-The selected drive motor is a **LEGO Technic Medium Angular Motor (Powered Up)**, rated 5–9V with a no-load speed of approximately 185 RPM and stall torque of approximately 18 Ncm. Two identical motors were ordered, but the present design intends to use **one motor for propulsion and keep the second as a backup**.
+The selected drive motor is a **LEGO Technic Medium Angular Motor (Powered Up)**, rated 5–9V with a no-load speed of approximately 185 RPM and stall torque of approximately 18 Ncm. Two identical motors were ordered, but the present design intends to use **one motor for propulsion and keep the second as a backup** .
 
 Unlike the previously planned N20, this motor has a **built-in absolute rotation sensor** (reports both speed and position to ~1° accuracy) rather than a separate quadrature encoder module, and connects via LEGO's LPF2 connector rather than bare motor leads. This changes how it interfaces with the DRV8833 driver and the Arduino — the LPF2 connector will need to be broken out or adapted, and sensor read-out logic will differ from the N20's encoder. This is tracked as an open decision below.
 
 ### Mechanical differential
 
-The drive motor will drive the two wheels of the driving axle through a **mechanical differential gearbox**. The two wheels therefore remain part of one mechanical drivetrain while being able to rotate at different speeds during a turn.
+The drive motor will drive the two wheels of the driving axle through a **mechanical differential gearbox** . The two wheels therefore remain part of one mechanical drivetrain while being able to rotate at different speeds during a turn.
 
 ### Ackermann steering
 
@@ -162,17 +170,17 @@ The final geometry will be determined by testing rather than by servo-angle assu
 
 The motor's nominal no-load speed is approximately 185 RPM (at 7.2V), but motor RPM alone does not determine vehicle speed. Final speed also depends on:
 
-- motor operating voltage;
+* motor operating voltage; 
 
-- load;
+* load; 
 
-- gear ratio between the motor and differential;
+* gear ratio between the motor and differential; 
 
-- differential/output gearing;
+* differential/output gearing; 
 
-- wheel diameter;
+* wheel diameter; 
 
-- tyre deformation and slip.
+* tyre deformation and slip.
 
 Once the final wheel diameter and gear ratio are known, theoretical wheel speed will be calculated using:
 
@@ -202,19 +210,19 @@ We are currently evaluating **Arduino Uno vs Arduino Mega** for the main vehicle
 
 The Arduino will be responsible for time-sensitive vehicle tasks such as:
 
-- drive-motor commands;
+* drive-motor commands; 
 
-- steering-servo commands;
+* steering-servo commands; 
 
-- reading the motor's rotation sensor;
+* reading the motor's rotation sensor; 
 
-- reading the MPU6500;
+* reading the MPU6500; 
 
-- reading three distance sensors;
+* reading three distance sensors; 
 
-- receiving perception information from the Raspberry Pi;
+* receiving perception information from the Raspberry Pi; 
 
-- executing the vehicle state machine.
+* executing the vehicle state machine.
 
 The **Raspberry Pi** is intended to handle the computationally heavier camera-processing work. Instead of directly controlling the motor, it will send useful perception information to the Arduino.
 
@@ -226,15 +234,15 @@ This separation lets us test vision and mobility independently and prevents a ca
 
 The intended distance-sensor arrangement is:
 
-![Three Sensor Layout](./t-photos/three-sensor-layout.png)
+![Three Sensor Layout](./other/three-sensor-layout.png)
 
 The proposed roles are:
 
-- **Left sensor:** measure left-side clearance and help estimate lateral position.
+* **Left sensor:** measure left-side clearance and help estimate lateral position.
 
-- **Front sensor:** measure forward clearance and help identify approach conditions.
+* **Front sensor:** measure forward clearance and help identify approach conditions.
 
-- **Right sensor:** measure right-side clearance and help estimate lateral position.
+* **Right sensor:** measure right-side clearance and help estimate lateral position.
 
 The exact sensor technology has not yet been selected. Ultrasonic, infrared and time-of-flight approaches will be compared using range, repeatability, field of view, update rate, pin requirements, physical size and behaviour on the actual field.
 
@@ -246,35 +254,35 @@ See [Power & Sense Management](documentation/power-and-sense-management.md).
 
 Two power approaches are currently being evaluated:
 
-1. an approximately **11V rechargeable battery**;
+01. an approximately **11V rechargeable battery** ;
 
-2. a **high-quality power bank**.
+02. a **high-quality power bank** .
 
 The final choice will be made after measuring or verifying:
 
-- available current;
+* available current; 
 
-- voltage stability;
+* voltage stability; 
 
-- peak-load behaviour;
+* peak-load behaviour; 
 
-- runtime;
+* runtime; 
 
-- mass;
+* mass; 
 
-- Raspberry Pi compatibility;
+* Raspberry Pi compatibility; 
 
-- servo requirements;
+* servo requirements; 
 
-- motor requirements.
+* motor requirements.
 
 The LEGO Medium Motor accepts 5–9V directly, so it is compatible with an approximately 11V source only through the DRV8833 (or equivalent regulation), rather than requiring a dedicated step-down as strictly as the N20 did. The DRV8833 and the final motor-supply strategy must still be tested appropriately.
 
 Available regulation hardware includes:
 
-- 2 × MP1584 adjustable 3A buck modules;
+* 2 × MP1584 adjustable 3A buck modules; 
 
-- TPS565201 5V 5A step-down module.
+* TPS565201 5V 5A step-down module.
 
 A quantitative power budget is being prepared and will be updated with datasheet and measured values as the final hardware is selected.
 
@@ -282,7 +290,7 @@ A quantitative power budget is being prepared and will be updated with datasheet
 
 ## Proposed Navigation State Machine <a id="navigation"></a>
 
-![Navigation Layout](./t-photos/Nav-Layout.png)
+![Navigation Layout](./other/Nav-Layout.png)
 
 These state names are currently architectural placeholders. Each transition will be tied to measured sensor or vision conditions as testing progresses.
 
@@ -314,39 +322,39 @@ A subsystem is not considered final simply because it works once.
 
 For each major subsystem we intend to record:
 
-- what was tested;
+* what was tested; 
 
-- test conditions;
+* test conditions; 
 
-- expected behaviour;
+* expected behaviour; 
 
-- measured result;
+* measured result; 
 
-- failure or deviation;
+* failure or deviation; 
 
-- change made;
+* change made; 
 
-- retest result;
+* retest result; 
 
-- final decision.
+* final decision.
 
 Examples include:
 
-- measured rotation-sensor counts per wheel revolution;
+* measured rotation-sensor counts per wheel revolution; 
 
-- straight-line deviation over a fixed distance;
+* straight-line deviation over a fixed distance; 
 
-- measured turning radius;
+* measured turning radius; 
 
-- IMU turn error;
+* IMU turn error; 
 
-- distance-sensor error at known distances;
+* distance-sensor error at known distances; 
 
-- Raspberry Pi detection success rate;
+* Raspberry Pi detection success rate; 
 
-- battery/power-bank runtime;
+* battery/power-bank runtime; 
 
-- regulator voltage under load.
+* regulator voltage under load.
 
 The current test matrix is in [Testing & Results](documentation/testing-and-results.md).
 
@@ -358,13 +366,13 @@ Major component decisions are recorded separately so that the repository shows *
 
 See:
 
-- [Engineering Decisions](documentation/engineering-decisions.md)
+* [Engineering Decisions](documentation/engineering-decisions.md)
 
-- [Risk & Failure Analysis](documentation/risk-and-failure-analysis.md)
+* [Risk & Failure Analysis](documentation/risk-and-failure-analysis.md)
 
-- [Calibration](documentation/calibration.md)
+* [Calibration](documentation/calibration.md)
 
-- [Engineering Journal](documentation/engineering-journal.md)
+* [Engineering Journal](documentation/engineering-journal.md)
 
 ---
 
@@ -372,83 +380,33 @@ See:
 
 ### Engineering
 
-- [Engineering Journal](documentation/engineering-journal.md)
+* [Engineering Journal](documentation/engineering-journal.md)
 
-- [Engineering Decisions](documentation/engineering-decisions.md)
+* [Engineering Decisions](documentation/engineering-decisions.md)
 
-- [Testing & Results](documentation/testing-and-results.md)
+* [Testing & Results](documentation/testing-and-results.md)
 
-- [Calibration](documentation/calibration.md)
+* [Calibration](documentation/calibration.md)
 
-- [Risk & Failure Analysis](documentation/risk-and-failure-analysis.md)
+* [Risk & Failure Analysis](documentation/risk-and-failure-analysis.md)
 
 ### Vehicle subsystems
 
-- [Hardware Inventory](documentation/hardware-inventory.md)
+* [Hardware Inventory](documentation/hardware-inventory.md)
 
-- [Mobility Management](documentation/mobility-management.md)
+* [Mobility Management](documentation/mobility-management.md)
 
-- [Power & Sense Management](documentation/power-and-sense-management.md)
+* [Power & Sense Management](documentation/power-and-sense-management.md)
 
-- [Obstacle Management](documentation/obstacle-management.md)
+* [Obstacle Management](documentation/obstacle-management.md)
 
-- [Software Architecture](documentation/software-architecture.md)
+* [Software Architecture](documentation/software-architecture.md)
 
-- [Troubleshooting Log](documentation/troubleshooting-log.md)
+* [Troubleshooting Log](documentation/troubleshooting-log.md)
 
 ### Project history
 
-- [CHANGELOG](CHANGELOG.md)
-
----
-
-## Repository Structure <a id="repo-structure"></a>
-
-```text
-
-WRO2026-Aurum-TriMech/
-
-├── README.md
-
-├── CHANGELOG.md
-
-├── documentation/
-
-│ ├── engineering-journal.md
-
-│ ├── engineering-decisions.md
-
-│ ├── testing-and-results.md
-
-│ ├── calibration.md
-
-│ ├── risk-and-failure-analysis.md
-
-│ ├── hardware-inventory.md
-
-│ ├── mobility-management.md
-
-│ ├── power-and-sense-management.md
-
-│ ├── obstacle-management.md
-
-│ ├── software-architecture.md
-
-│ └── troubleshooting-log.md
-
-├── models/
-
-├── schemes/
-
-├── src/
-
-├── t-photos/
-
-├── v-photos/
-
-└── video/
-
-```
+* [CHANGELOG](CHANGELOG.md)
 
 ---
 
@@ -456,29 +414,29 @@ WRO2026-Aurum-TriMech/
 
 The following are deliberately not presented as final:
 
-- Arduino Uno vs Mega;
+* Arduino Uno vs Mega; 
 
-- exact Raspberry Pi model;
+* exact Raspberry Pi model; 
 
-- camera model;
+* camera model; 
 
-- exact three distance-sensor models;
+* exact three distance-sensor models; 
 
-- final steering servo;
+* final steering servo; 
 
-- final power source;
+* final power source; 
 
-- final regulator allocation;
+* final regulator allocation; 
 
-- final gear ratio;
+* final gear ratio; 
 
-- final wheel diameter;
+* final wheel diameter; 
 
-- LPF2-to-Arduino/DRV8833 interface method for the LEGO Medium Motor;
+* LPF2-to-Arduino/DRV8833 interface method for the LEGO Medium Motor; 
 
-- final Pi-to-Arduino protocol;
+* final Pi-to-Arduino protocol; 
 
-- final navigation thresholds.
+* final navigation thresholds.
 
 These will be closed through testing and recorded in the decision log.
 
@@ -486,23 +444,23 @@ These will be closed through testing and recorded in the decision log.
 
 ## Next Development Milestones <a id="next-development-milestones"></a>
 
-1. Build the LEGO Technic rolling chassis.
+01. Build the LEGO Technic rolling chassis.
 
-2. Build and measure Ackermann steering.
+02. Build and measure Ackermann steering.
 
-3. Integrate the mechanical differential.
+03. Integrate the mechanical differential.
 
-4. Install LEGO Medium Motor and DRV8833, resolving LPF2 connector interfacing.
+04. Install LEGO Medium Motor and DRV8833, resolving LPF2 connector interfacing.
 
-5. Calibrate rotation-sensor counts and drivetrain distance.
+05. Calibrate rotation-sensor counts and drivetrain distance.
 
-6. Test MPU6500.
+06. Test MPU6500.
 
-7. Select and calibrate three distance sensors.
+07. Select and calibrate three distance sensors.
 
-8. Compare Uno and Mega integration requirements.
+08. Compare Uno and Mega integration requirements.
 
-9. Measure power consumption under realistic loads.
+09. Measure power consumption under realistic loads.
 
 10. Compare battery and power-bank approaches.
 
